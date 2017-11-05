@@ -31,11 +31,33 @@
 }
 
 body {
+	background: #333;
+	color:#fff;
 	margin-top: 40px;
 }
 
+.modal, .modal-dialog{
+color: black;
+}
+
 .messages {
-	margin-top: 20px;
+	background:#fff;
+	color:black;
+	height:100vh;
+	width:100%;
+}
+.nav-item{
+	color:gray;
+}
+.nav-link:hover,.nav-item:hover{
+	color:#aaa;
+}
+.nav-item .active{
+	color:gray;
+}
+table{
+width:100%;
+margin:auto;
 }
 </style>
 </head>
@@ -112,7 +134,7 @@ body {
 
 
 
-			<div class="col-md-12">
+			<div class="col-md-12" >
 
 				<ul class="nav nav-tabs">
 					<li class="nav-item "><a data-target="#all"
@@ -131,12 +153,11 @@ body {
 					<li class="nav-item"><a data-target="#soc6" class="nav-link">Drop
 							In</a></li>
 				</ul>
-				<div class="messages">
-					<div class="header"></div>
+				<div class="messages" >
 
-					<div class="msg-container" id="all">
-						<table class="table table-responsive "
-							cellspacing="0" width="100%" id="postlist-table">
+					<div class="msg-container table-responsive text-left" id="all">
+						<table class="table  " 
+							cellspacing="0" width="100%" id="msg-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -149,8 +170,8 @@ body {
 						</table>
 
 					</div>
-					<div class="msg-container" id="felles">
-					<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="felles">
+					<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -165,8 +186,8 @@ body {
 					
 					
 					</div>
-					<div class="msg-container" id="soc1">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc1">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -180,8 +201,8 @@ body {
 						</table>
 						
 					</div>
-					<div class="msg-container" id="soc2">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc2">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -194,8 +215,8 @@ body {
 							<tbody id="soc2_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container" id="soc3">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc3">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -208,8 +229,8 @@ body {
 							<tbody id="soc3_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container" id="soc4">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc4">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -222,8 +243,8 @@ body {
 							<tbody id="soc4_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container" id="soc5">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc5">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
@@ -236,8 +257,8 @@ body {
 							<tbody id="soc5_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container" id="soc6">
-						<table class="table table-responsive "
+					<div class="msg-container table-responsive text-left" id="soc6">
+						<table class="table  "
 							cellspacing="0" width="100%" id="postlist-table">
 							<thead>
 								<tr>
