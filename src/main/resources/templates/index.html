@@ -271,8 +271,6 @@ body {
 				success : function(data) {
 					$('#message').val("");
 					$("#newModal").modal('hide');
-					fetchMessages(getUrlMessages(date, null), updateAllMessages);
-					
 				},
 				error : function(textStatus, errorThrown) {
 				}
@@ -361,7 +359,7 @@ body {
 			fetchMessages(getUrlMessages(date, null), updateAllMessages);
 			window.setInterval(function(){
 				fetchMessages(getUrlMessages(date, null), updateAllMessages);
-			}, 5000);
+			}, 3000);
 			
 
 		})
