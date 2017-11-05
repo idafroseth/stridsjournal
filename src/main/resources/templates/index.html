@@ -334,7 +334,8 @@ margin:auto;
 		function updateAllMessages(data) {
 			
 			$(data).each(function(pos, item){
-				if(!$.inArray(item.id, msg)){
+				
+				if($.inArray(item.id, msg) === -1){
 				
 					msg.push(item.id);
 					
