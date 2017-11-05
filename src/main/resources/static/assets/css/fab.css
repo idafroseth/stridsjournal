@@ -21,7 +21,7 @@
 .FAB {
   position: absolute;
   top:40px;
-  right: 10px;
+  right: 20px;
   width: 56px;
 }
 .FAB__action-button, .FAB__mini-action-button {
@@ -30,7 +30,7 @@
 }
 .FAB__action-button {
   top:40px;
-  right: 0;
+  right: 20;
 }
 .FAB__action-button:hover .action-button__icon {
   box-shadow: 0 0 8px rgba(0, 0, 0, .14), 0 8px 16px rgba(0, 0, 0, .28);
