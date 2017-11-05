@@ -282,6 +282,7 @@ margin:auto;
 
 	<script>
 		var date = null;
+		var msg = [];
 		
 		function saveMessage(message) {
 			$.ajax({
@@ -333,27 +334,32 @@ margin:auto;
 		function updateAllMessages(data) {
 			
 			$(data).each(function(pos, item){
-				$("#all_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');	
-				if(item.sentTo=== "SOC1"){
-					$("#soc1_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "FELLES"){
-					$("#felles_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "SOC2"){
-					$("#soc2_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "SOC3"){
-					$("#soc3_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "SOC4"){
-					$("#soc4_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "SOC5"){
-					$("#soc5_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-				}
-				if(item.sentTo=== "DropIn"){
-					$("#soc6_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+				if(!$.inArray(item.id, msg)){
+				
+					msg.push(item.id);
+					
+					$("#all_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');	
+					if(item.sentTo=== "SOC1"){
+						$("#soc1_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "FELLES"){
+						$("#felles_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "SOC2"){
+						$("#soc2_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "SOC3"){
+						$("#soc3_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "SOC4"){
+						$("#soc4_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "SOC5"){
+						$("#soc5_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
+					if(item.sentTo=== "DropIn"){
+						$("#soc6_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
+					}
 				}
 			})
 			
