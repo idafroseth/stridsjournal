@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head th:fragment="meta">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description"
+			content="Todo application" />
+		<meta name="keywords" content="Todo, calendar, organize, simple"/>
+		<meta name="author" content="Ida Marie Frøseth" />
+		<title>Stridsjournal</title>
+	</head>
+	<head th:fragment="generalCss">
+		<link rel="icon" href="../../favicon.ico" />
+		<!-- BOOTSTRAP -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+		
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link th:href="@{/assets/css/ie10-viewport-bug-workaround.css}"
+			rel="stylesheet" />
+
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+			rel="stylesheet" />
+			
+		<!-- FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,500"
+			rel="stylesheet" />
+		
+		<link rel="stylesheet" type="text/css"
+			th:href="@{/assets/vendor/sweetalert-master/dist/sweetalert.css}" />
+	
+	</head>
+
+	<head th:fragment="appCss">
+		<link rel="stylesheet" type="text/css"
+		th:href="@{/assets/css/fab.css}"/>
+		<link rel="stylesheet" type="text/css"
+			th:href="@{/assets/css/style.css}" />
+	
+	</head>
+		
+		
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		    <![endif]-->
+
+		
+	
+</head>
+	
+	<body>
+		
+		<div th:fragment="header">
+			<div class="line-banner"></div>
+	
+			<div class="masthead clearfix">
+				<div class="inner">
+					<div class="navbar-brand hidden-xs-down">appiTude<!--  span class="icon-check" style="font-size:2.5em;"></span--><!--  img src="assets/icon/logo.svg" alt="" width="60px"
+							height="60px"/--> 
+					</div>
+					<!-- nav class="nav nav-masthead">
+						<a class="nav-link" href="/index" id="navHome">Home</a>
+						<a class="nav-link" href="/todo/dashboard"
+							th:if="${account != null}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/todo/dashboard' ? 'active':''}">Todo</a>
+						<a class="nav-link" href="/login" id="login"
+							th:if="${account == null}">Login</a>
+						<a class="nav-link" href="/logout"
+							th:if="${account != null}">Logout</a>
+					</nav-->
+				</div>
+	
+	
+			</div>
+		</div>
+	</body>
+</html>
