@@ -139,6 +139,10 @@ footer{
     animation: spin 2s linear infinite;
 }
 
+.alarm{
+	background-color:#ffc6cc;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

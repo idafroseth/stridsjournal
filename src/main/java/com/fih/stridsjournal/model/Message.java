@@ -20,6 +20,7 @@ public class Message {
 	@Column(name = "message", length = 4096)
 	private String message;
 	private String sentTo;
+	private boolean requiresAction = false;
 	
 	private Date savedAt = new Date();
 	
@@ -62,6 +63,14 @@ public class Message {
 
 	public void setSavedAt(Date savedAt) {
 		this.savedAt = savedAt;
+	}
+
+	public boolean isRequiresAction() {
+		return requiresAction;
+	}
+
+	public void setRequiresAction(boolean requiresAction) {
+		this.requiresAction = requiresAction;
 	}
 	
 }

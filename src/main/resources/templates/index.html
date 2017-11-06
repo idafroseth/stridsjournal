@@ -32,39 +32,44 @@
 
 body {
 	background: #333;
-	color:#fff;
+	color: #fff;
 	margin-top: 40px;
 }
 
-.modal, .modal-dialog{
-color: black;
+.modal, .modal-dialog {
+	color: black;
 }
 
 .messages {
-	background:#fff;
-	color:black;
-	height:100vh;
-	width:100%;
+	background: #fff;
+	color: black;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
 }
-.nav-item{
-	color:gray;
+
+.nav-item {
+	color: gray;
 }
-.nav-link:hover,.nav-item:hover{
-	color:#aaa;
+
+.nav-link:hover, .nav-item:hover {
+	color: #aaa;
 }
-.nav-item .active{
-	color:gray;
+
+.nav-item .active {
+	color: gray;
 }
-table{
-width:100%;
-margin:auto;
+
+table {
+	width: 100%;
+	margin: auto;
 }
 </style>
 </head>
 <body class="text-center">
 	<!--  div th:replace="fragments/admin-fragments :: admin-nav" th:remove="tag"></div-->
-	<h1 style="margin-bottom:50px;">CDX Stridsjournal</h1>
-	
+	<h1 style="margin-bottom: 50px;">CDX Stridsjournal</h1>
+
 
 	<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
 		aria-labelledby="add-tournament-modal-label" aria-hidden="true">
@@ -111,6 +116,12 @@ margin:auto;
 							<label for="message">Hendelse</label>
 							<textarea class="form-control" id="message" rows="5"></textarea>
 						</div>
+						<div class="form-check" style="display:none">
+							<label class="form-check-label"> <input type="checkbox"
+								class="form-check-input" id="requiresAction" /> Krever
+								oppfølging
+							</label>
+						</div>
 
 					</form>
 					<div class="text-right">
@@ -134,7 +145,7 @@ margin:auto;
 
 
 
-			<div class="col-md-12" >
+			<div class="col-md-12">
 
 				<ul class="nav nav-tabs">
 					<li class="nav-item "><a data-target="#all"
@@ -147,11 +158,10 @@ margin:auto;
 					<li class="nav-item"><a data-target="#soc5" class="nav-link">SOC5</a></li>
 					<li class="nav-item"><a data-target="#soc6" class="nav-link">DropIn</a></li>
 				</ul>
-				<div class="messages" >
+				<div class="messages">
 
 					<div class="msg-container table-responsive text-left" id="all">
-						<table class="table  " 
-							cellspacing="0" width="100%" id="msg-table">
+						<table class="table  " cellspacing="0" width="100%" id="msg-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -165,8 +175,8 @@ margin:auto;
 
 					</div>
 					<div class="msg-container table-responsive text-left" id="felles">
-					<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -177,12 +187,12 @@ margin:auto;
 							</thead>
 							<tbody id="felles_msg_body"></tbody>
 						</table>
-					
-					
+
+
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc1">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -193,11 +203,11 @@ margin:auto;
 							</thead>
 							<tbody id="soc1_msg_body"></tbody>
 						</table>
-						
+
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc2">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -210,8 +220,8 @@ margin:auto;
 						</table>
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc3">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -224,8 +234,8 @@ margin:auto;
 						</table>
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc4">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -238,8 +248,8 @@ margin:auto;
 						</table>
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc5">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -252,8 +262,8 @@ margin:auto;
 						</table>
 					</div>
 					<div class="msg-container table-responsive text-left" id="soc6">
-						<table class="table  "
-							cellspacing="0" width="100%" id="postlist-table">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -277,7 +287,7 @@ margin:auto;
 	<script>
 		var date = null;
 		var msg = [];
-		
+
 		function saveMessage(message) {
 			$.ajax({
 				url : "/api/message",
@@ -287,6 +297,7 @@ margin:auto;
 				success : function(data) {
 					$('#message').val("");
 					$("#newModal").modal('hide');
+					$('#requiresAction').prop('checked', false);
 				},
 				error : function(textStatus, errorThrown) {
 				}
@@ -296,73 +307,103 @@ margin:auto;
 		function getUrlMessages(date, cell) {
 			var url = "/api/message?"
 			if (date) {
-				var dateString = moment(date).format('DD/MM/YYYY/HH:mm:ss');
-				url += "after=" + dateString;
-				
+				//var dateString = moment(date).format('DD/MM/YYYY/HH:mm:ss');
+				url += "after=" + date;
+
 			}
 			if (cell) {
 				url += "to=" + cell;
 			}
-			
+
 			return url;
 		}
 
 		function fetchMessages(url, callback) {
-			date = new Date();
+
 			$.ajax({
-						url : url,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						success : callback,
-						error : function(textStatus, errorThrown) {
-							alert("Error getting the data"
-									+ JSON.stringify(textStatus));
-						}
-					});
+				url : url,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				success : callback,
+				error : function(textStatus, errorThrown) {
+					alert("Connection lost for a moment... Don't worry");
+				}
+			});
 		}
 
-		function emptyTbody(){
+		function emptyTbody() {
 			$('tbody').empty();
 		}
-		
+		/*<![CDATA[*/
 		function updateAllMessages(data) {
-			
-			$(data).each(function(pos, item){
-				
-				if($.inArray(item.id, msg) === -1){
-				
-					msg.push(item.id);
-					
-					$("#all_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');	
-					if(item.sentTo=== "SOC1"){
-						$("#soc1_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "FELLES"){
-						$("#felles_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "SOC2"){
-						$("#soc2_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "SOC3"){
-						$("#soc3_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "SOC4"){
-						$("#soc4_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "SOC5"){
-						$("#soc5_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-					if(item.sentTo=== "DropIn"){
-						$("#soc6_msg_body").prepend('<tr class="blink"><td>'+moment(item.savedAt).format('DDnovHHmmss')+'</td><td>'+item.sentBy+'</td><td>'+item.sentTo+'</td><td>'+item.message+'</td></tr>');
-					}
-				}
-			})
-			
+
+			$(data).each(
+					function(pos, item) {
+
+						if ($.inArray(item.id, msg) === -1) {
+
+							msg.push(item.id);
+							date = moment(item.savedAt).format(
+									'DD/MM/YYYY/HH:mm:ss');
+							var $tr = $('<tr>', {
+								class : 'blink'
+							});
+							
+						/*	if (item.requiresAction) {
+								$tr = $('<tr>', {
+									class : 'blink alarm'
+								});
+								td = '<td>'
+										+ moment(item.savedAt)
+												.format('DDnovHHmmss')
+										+ '</td><td>' + item.sentBy + '</td><td>'
+										+ item.sentTo + '</td><td>' + item.message
+										+ '</td><td><button class="btn btn-outline-danger">Løst</button></td>';
+								
+							}
+							else{*/
+							var	td = '<td>'
+									+ moment(item.savedAt)
+											.format('DDnovHHmmss')
+									+ '</td><td>' + item.sentBy + '</td><td>'
+									+ item.sentTo + '</td><td>' + item.message
+									+ '</td>';
+							//}
+
+							
+							$tr.append(td);
+
+							if (item.sentTo === "FELLES") {
+								$("tbody").prepend($tr);
+							} else {
+								$("#all_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "SOC1") {
+								$("#soc1_msg_body").prepend($tr);
+							}
+
+							if (item.sentTo === "SOC2") {
+								$("#soc2_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "SOC3") {
+								$("#soc3_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "SOC4") {
+								$("#soc4_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "SOC5") {
+								$("#soc5_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "DropIn") {
+								$("#soc6_msg_body").prepend($tr);
+							}
+						}
+					})
+
 		}
-		
+		/*]]>*/
 		$(document).ready(function() {
-			
-			
+
 			$('.msg-container').hide();
 			$('#all').show();
 			$('#save').click(function() {
@@ -370,7 +411,8 @@ margin:auto;
 				message.sentTo = $('#to').val();
 				message.sentBy = $('#from').val();
 				message.message = $('#message').val();
-			
+				message.requiresAction = $('#requiresAction').is(':checked');
+
 				saveMessage(message);
 
 			})
@@ -379,10 +421,9 @@ margin:auto;
 				onClickNewFab();
 			})
 			fetchMessages(getUrlMessages(date, null), updateAllMessages);
-			window.setInterval(function(){
+			window.setInterval(function() {
 				fetchMessages(getUrlMessages(date, null), updateAllMessages);
 			}, 3000);
-			
 
 		})
 
@@ -397,8 +438,6 @@ margin:auto;
 		function onClickNewFab() {
 			$("#newModal").modal();
 		}
-		
-	
 	</script>
 </body>
 </html>
