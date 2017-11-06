@@ -159,7 +159,6 @@ table {
 					<li class="nav-item"><a data-target="#soc6" class="nav-link">DropIn</a></li>
 				</ul>
 				<div class="messages">
-
 					<div class="msg-container table-responsive text-left" id="all">
 						<table class="table  " cellspacing="0" width="100%" id="msg-table">
 							<thead>
@@ -170,10 +169,12 @@ table {
 									<th>MELDING</th>
 								</tr>
 							</thead>
-							<tbody id="all_msg_body"></tbody>
+							<tbody id="soc0_msg_body">
+							</tbody>
 						</table>
 
 					</div>
+					
 					<div class="msg-container table-responsive text-left" id="felles">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
@@ -348,40 +349,21 @@ table {
 							var $tr = $('<tr>', {
 								class : 'blink'
 							});
-							
-						/*	if (item.requiresAction) {
-								$tr = $('<tr>', {
-									class : 'blink alarm'
-								});
-								td = '<td>'
-										+ moment(item.savedAt)
-												.format('DDnovHHmmss')
-										+ '</td><td>' + item.sentBy + '</td><td>'
-										+ item.sentTo + '</td><td>' + item.message
-										+ '</td><td><button class="btn btn-outline-danger">Løst</button></td>';
-								
-							}
-							else{*/
+				
 							var	td = '<td>'
 									+ moment(item.savedAt)
 											.format('DDnovHHmmss')
 									+ '</td><td>' + item.sentBy + '</td><td>'
 									+ item.sentTo + '</td><td>' + item.message
 									+ '</td>';
-							//}
-
-							
+		
 							$tr.append(td);
-
-							if (item.sentTo === "FELLES") {
-								$("tbody").prepend($tr);
-							} else {
-								$("#all_msg_body").prepend($tr);
-							}
+							
+							
+							
 							if (item.sentTo === "SOC1") {
 								$("#soc1_msg_body").prepend($tr);
 							}
-
 							if (item.sentTo === "SOC2") {
 								$("#soc2_msg_body").prepend($tr);
 							}
@@ -397,6 +379,17 @@ table {
 							if (item.sentTo === "DropIn") {
 								$("#soc6_msg_body").prepend($tr);
 							}
+							if (item.sentTo === "FELLES") {
+								$("tbody").prepend($tr);
+							}else{
+								$("#soc0_msg_body").prepend('<tr class="blink"><td>'
+										+ moment(item.savedAt)
+										.format('DDnovHHmmss')
+								+ '</td><td>' + item.sentBy + '</td><td>'
+								+ item.sentTo + '</td><td>' + item.message
+								+ '</td></tr>');
+							}
+							
 						}
 					})
 
