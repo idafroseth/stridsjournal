@@ -71,7 +71,7 @@ public class UserController {
 	
 		 if (userService.userExists(userToRegister.getUsername())) {
 				bindingResult.addError(new ObjectError("username", "E-postadressen er allerede registrert."));
-				return "/register";
+				return "register";
 		 }
 
 		 userService.saveUser(userToRegister);
