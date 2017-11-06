@@ -41,11 +41,11 @@ function validateRegisterForm(){
 	var passwordRepeat = $('#passwordRepeatRegisterInput').val();
 	
 	
-	if(!validateEmail(email)){
+/*	if(!validateEmail(email)){
 		$('#emailRegisterError').removeClass('sr-only');
 		$('#emailRegisterInput').parent().addClass('has-danger');
 		 isValid = false;
-	}
+	}*/
 	if(password.length<6){
 		$('#passwordRegisterInput').parent().addClass('has-danger');
 		$('#passwordRegisterError').removeClass('sr-only');

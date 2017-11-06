@@ -1,5 +1,6 @@
 package com.fih.stridsjournal.controller;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +30,11 @@ public class ApiController {
 	MessageRepository service;
 	
 	@PostMapping(value = "/message")
-	public Message saveMessage(@RequestBody Message saveMessage){
+	public Message saveMessage(@RequestBody Message saveMessage, Principal principal){
+		if(principal == null){
+			throw new NotAllowedException();
+		}
+		saveMessage.setSentBy(principal.getName());
 		return service.save(saveMessage);
 	}
 	

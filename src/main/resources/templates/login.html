@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<div th:replace="fragments/header :: meta" th:remove="tag"></div>
+		<div th:replace="fragments/header :: generalCss" th:remove="tag"></div>
+		<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+	</head>
+
+<body>
+	<div class="img-container"></div>
+	<div class="img" width="100%"></div>
+	<div class="jumbotron" style="text-align:center; ;background:rgba(0,0,0,0);color:#fff;">
+	 	<!--  span class="icon-login logo" style="font-size:80px;"></span-->
+				<h2 style="font-size:4em; margin-bottom:10%">Login</h2>
+
+				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+					<form th:action="@{/login}" method="post" id="loginForm">
+						<div class="form-group">
+							<input type="email" name="username" class="form-control"
+								id="emailLoginInput" th:placeholder="E-mail" />
+							
+			
+						</div>
+						<div class="form-group">
+							<!--  label for="passwordLoginInput">Passord</label-->
+							<input type="password" class="form-control"
+								id="passwordLoginInput" th:placeholder="Password" name="password" />
+						</div>
+						<div class="form-control-feedback sr-only" id="emailRegisterError" >Wrong username or password</div>
+
+
+					</form>
+					<div class="alert alert-danger" th:if="${param.error}">Wrong username or password</div>
+
+
+					<div style="padding-top: 10px; padding-bottom: 10px">
+						<!--  button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button-->
+						<button type="button" class="btn btn-block btn-warning"
+							id="loginButton">Login</button>
+					</div>
+
+					<!-- p class="text-small text-xs-center">
+						<span>Not registered?</span> <a href="/register">Register</a>
+					</p-->
+				</div>
+
+			</div>
+
+
+
+
+
+	<div th:replace="fragments/javascript :: generalJs" th:remove="tag"></div>
+	<!--  div th:replace="fragments/import :: footer" th:remove="tag"></div-->
+	<script th:src="@{/assets/js/login.js}"></script>
+
+	<script>
+		$("#login").addClass('active');
+	</script>
+	
+
+</body>
+</html>
