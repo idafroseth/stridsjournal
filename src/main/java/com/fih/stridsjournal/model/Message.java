@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+/**
+ * This is a comment to enable push
+ * @author Zelus
+ *
+ */
 
 @Entity
 public class Message {
