@@ -18,15 +18,15 @@
 		<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 			<form th:action="@{/login}" method="post" id="loginForm">
 				<div class="form-group">
-					<input type="email" name="username" class="form-control"
-						id="emailLoginInput" th:placeholder="E-mail" />
+					<input type="text" name="username" class="form-control"
+						id="emailLoginInput" th:placeholder="Brukernavn" />
 
 
 				</div>
 				<div class="form-group">
 					<!--  label for="passwordLoginInput">Passord</label-->
 					<input type="password" class="form-control" id="passwordLoginInput"
-						th:placeholder="Password" name="password" />
+						th:placeholder="Passord" name="password" />
 				</div>
 				<div class="form-control-feedback sr-only" id="emailRegisterError">Wrong
 					username or password</div>
