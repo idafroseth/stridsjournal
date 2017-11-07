@@ -20,7 +20,7 @@
 }
 .FAB {
   position: absolute;
-  top:40px;
+  top:60px;
   right: 20px;
   width: 56px;
 }
@@ -29,7 +29,7 @@
   position: absolute;
 }
 .FAB__action-button {
-  top:40px;
+  top:60px;
   right: 20;
 }
 .FAB__action-button:hover .action-button__icon {

@@ -1,397 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<div th:replace="fragments/header :: meta" th:remove="tag"></div>
-	<div th:replace="fragments/header :: generalCss" th:remove="tag"></div>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-		rel="stylesheet" />
-	<div th:replace="fragments/header :: appCss" th:remove="tag"></div>
+<div th:replace="fragments/header :: meta" th:remove="tag"></div>
+<div th:replace="fragments/header :: generalCss" th:remove="tag"></div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<div th:replace="fragments/header :: appCss" th:remove="tag"></div>
 
 </head>
-	<body class="text-center">
-		<!--  div th:replace="fragments/admin-fragments :: admin-nav" th:remove="tag"></div-->
-		<h1 style="margin-bottom: 50px;">CDX Stridsjournal</h1>
-	
-	
-		<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
-			aria-labelledby="add-tournament-modal-label" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ny Rapport</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+<body class="text-center">
+	<!--  div th:replace="fragments/admin-fragments :: admin-nav" th:remove="tag"></div-->
+
+	<h1 class="col-md-12" style="margin-bottom: 20px;">CDX Stridsjournal</h1>
+		
+	<div class="col-md-3 col-sm-4 col-8">
+		<form class="text-left ">
+			<div class="form-group">
+						<label for="from">Få notifikasjoner for:</label> 
+						<select class="form-control" id="audio-chooser">
+							<option data-target="FELLES">Felles</option>
+							<option data-target="SOC1">SOC 1</option>
+							<option data-target="SOC2">SOC 2</option>
+							<option data-target="SOC3">SOC 3</option>
+							<option data-target="SOC4">SOC 4</option>
+							<option data-target="SOC5">SOC 5</option>
+							<option data-target="all">Alle</option>
+						</select>
 					</div>
-					<div class="modal-body">
-						<form th:action="@{/login}" method="post" id="loginForm"
-							class="text-left">
-							<div class="form-group" style="display: none;">
-								<div class="form-group">
-									<label for="from">Fra</label> <select class="form-control"
-										id="from">
-										<option>TOC</option>
-										<option>NOC</option>
-										<option>EXCON</option>
-										<option>RED CELL</option>
-	
-									</select>
-								</div>
-	
-							</div>
+				</form>
+	</div>
+
+	<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
+		aria-labelledby="add-tournament-modal-label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h5 class="modal-title" id="exampleModalLabel">Ny Rapport</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/login}" method="post" id="loginForm"
+						class="text-left">
+						<div class="form-group" style="display: none;">
 							<div class="form-group">
-								<div class="form-group">
-									<label for="to">Til</label> <select class="form-control" id="to">
-										<option>FELLES</option>
-										<option>SOC1</option>
-										<option>SOC2</option>
-										<option>SOC3</option>
-										<option>SOC4</option>
-										<option>SOC5</option>
-										<option>DropIn</option>
-									</select>
-								</div>
-	
+								<label for="from">Fra</label> <select class="form-control"
+									id="from">
+									<option>TOC</option>
+									<option>NOC</option>
+									<option>EXCON</option>
+									<option>RED CELL</option>
+
+								</select>
 							</div>
-							<div class="form-group">
-								<label for="message">Hendelse</label>
-								<textarea class="form-control" id="message" rows="5"></textarea>
-							</div>
-							<div class="form-check" style="display: none">
-								<label class="form-check-label"> <input type="checkbox"
-									class="form-check-input" id="requiresAction" /> Krever
-									oppfølging
-								</label>
-							</div>
-	
-						</form>
-						<div class="text-right">
-							<button class="btn btn-primary" id="save">Lagre</button>
+
 						</div>
-	
-	
+						<div class="form-group">
+							<div class="form-group">
+								<label for="to">Til</label> <select class="form-control" id="to">
+									<option>FELLES</option>
+									<option>SOC1</option>
+									<option>SOC2</option>
+									<option>SOC3</option>
+									<option>SOC4</option>
+									<option>SOC5</option>
+									<option>DropIn</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="message">Hendelse</label>
+							<textarea class="form-control" id="message" rows="5"></textarea>
+						</div>
+						<div class="form-check" style="display: none">
+							<label class="form-check-label"> <input type="checkbox"
+								class="form-check-input" id="requiresAction" /> Krever
+								oppfølging
+							</label>
+						</div>
+
+					</form>
+					<div class="text-right">
+						<button class="btn btn-primary" id="save">Lagre</button>
 					</div>
+
+
 				</div>
 			</div>
 		</div>
-		<div class="FAB" id="fab-add">
-			<div class="FAB__action-button">
-				<i class="action-button__icon material-icons">add</i>
-				<p class="action-button__text--hide">Ny rapport</p>
-			</div>
+	</div>
+	<div class="FAB" id="fab-add">
+		<div class="FAB__action-button">
+			<i class="action-button__icon material-icons">add</i>
+			<p class="action-button__text--hide">Ny rapport</p>
 		</div>
-		<div class="container-fluid">
-	
-			<div class="row">
-	
-	
-	
-				<div class="col-md-12">
-	
-					<ul class="nav nav-tabs">
-	
-						<li class="nav-item"><a data-target="#felles"
-							class="nav-link active">Felles</a></li>
-						<li class="nav-item"><a data-target="#soc1" class="nav-link">SOC1</a></li>
-						<li class="nav-item"><a data-target="#soc2" class="nav-link">SOC2</a></li>
-						<li class="nav-item"><a data-target="#soc3" class="nav-link">SOC3</a></li>
-						<li class="nav-item"><a data-target="#soc4" class="nav-link">SOC4</a></li>
-						<li class="nav-item"><a data-target="#soc5" class="nav-link">SOC5</a></li>
-						<li class="nav-item"><a data-target="#soc6" class="nav-link">DropIn</a></li>
-						<li class="nav-item "><a data-target="#all" class="nav-link">Alle</a></li>
-					</ul>
-					<div class="messages">
-						<div class="msg-container table-responsive text-left" id="all"
-							style="display: none;">
-							<table class="table" cellspacing="0" width="100%" id="msg-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc0_msg_body">
-								</tbody>
-							</table>
-	
-						</div>
-	
-						<div class="msg-container table-responsive text-left" id="felles">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="felles_msg_body"></tbody>
-							</table>
-	
-	
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc1"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc1_msg_body"></tbody>
-							</table>
-	
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc2"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc2_msg_body"></tbody>
-							</table>
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc3"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc3_msg_body"></tbody>
-							</table>
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc4"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc4_msg_body"></tbody>
-							</table>
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc5"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc5_msg_body"></tbody>
-							</table>
-						</div>
-						<div class="msg-container table-responsive text-left" id="soc6"
-							style="display: none;">
-							<table class="table  " cellspacing="0" width="100%"
-								id="postlist-table">
-								<thead>
-									<tr>
-										<th>DTG</th>
-										<th>FRA</th>
-										<th>TIL</th>
-										<th>MELDING</th>
-									</tr>
-								</thead>
-								<tbody id="soc6_msg_body"></tbody>
-							</table>
-						</div>
+	</div>
+	<div class="container-fluid">
+
+		<div class="row">
+
+
+
+			<div class="col-md-12">
+
+				<ul class="nav nav-tabs">
+
+					<li class="nav-item"><a data-target="#felles"
+						class="nav-link active">Felles</a></li>
+					<li class="nav-item"><a data-target="#soc1" class="nav-link">SOC1</a></li>
+					<li class="nav-item"><a data-target="#soc2" class="nav-link">SOC2</a></li>
+					<li class="nav-item"><a data-target="#soc3" class="nav-link">SOC3</a></li>
+					<li class="nav-item"><a data-target="#soc4" class="nav-link">SOC4</a></li>
+					<li class="nav-item"><a data-target="#soc5" class="nav-link">SOC5</a></li>
+					<li class="nav-item"><a data-target="#soc6" class="nav-link">DropIn</a></li>
+					<li class="nav-item "><a data-target="#all" class="nav-link">Alle</a></li>
+				</ul>
+			
+				<div class="messages">
+					<div class="msg-container table-responsive text-left" id="all"
+						style="display: none;">
+						<table class="table" cellspacing="0" width="100%" id="msg-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc0_msg_body">
+							</tbody>
+						</table>
+
 					</div>
-	
+
+					<div class="msg-container table-responsive text-left" id="felles">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="felles_msg_body"></tbody>
+						</table>
+
+
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc1"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc1_msg_body"></tbody>
+						</table>
+
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc2"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc2_msg_body"></tbody>
+						</table>
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc3"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc3_msg_body"></tbody>
+						</table>
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc4"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc4_msg_body"></tbody>
+						</table>
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc5"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc5_msg_body"></tbody>
+						</table>
+					</div>
+					<div class="msg-container table-responsive text-left" id="soc6"
+						style="display: none;">
+						<table class="table  " cellspacing="0" width="100%"
+							id="postlist-table">
+							<thead>
+								<tr>
+									<th>DTG</th>
+									<th>FRA</th>
+									<th>TIL</th>
+									<th>MELDING</th>
+								</tr>
+							</thead>
+							<tbody id="soc6_msg_body"></tbody>
+						</table>
+					</div>
 				</div>
-	
+
 			</div>
+
 		</div>
-		<audio id="audio" src="/assets/mp3/notification.mp3"></audio>
-		<div th:replace="fragments/javascript :: generalJs" th:remove="tag"></div>
-		<script>
-			var date = null;
-			var msg = [];
-			var ownMsgId = [];
-	
-			function saveMessage(message) {
-				$.ajax({
-					url : "/api/message",
-					type : "POST",
-					data : JSON.stringify(message),
-					contentType : "application/json; charset=utf-8",
-					success : function(data, textStatus, xhr) {
-						$('#message').val("");
-						$("#newModal").modal('hide');
-						$('#requiresAction').prop('checked', false);
-	
-						ownMsgId.push(data.id);
-					},
-					error : function(textStatus, errorThrown) {
-					}
-				});
-			}
-	
-			function getUrlMessages(date, cell) {
-				var url = "/api/message?"
-				if (date) {
-					//var dateString = moment(date).format('DD/MM/YYYY/HH:mm:ss');
-					url += "after=" + date;
-	
+	</div>
+	<audio id="audio" src="/assets/mp3/notification.mp3"></audio>
+	<div th:replace="fragments/javascript :: generalJs" th:remove="tag"></div>
+	<script>
+		var date = null;
+		var msg = [];
+		var ownMsgId = [];
+		var ITEM_ENUM = {
+				felles : "FELLES",
+				SOC1 : "SOC1",
+				SOC2 : "SOC2",
+				SOC3 : "SOC3",
+				SOC4 : "SOC4",
+				SOC5 : "SOC5",
+				all : "all"
+		}
+		var audioMsgFor = ITEM_ENUM.felles;
+
+		function saveMessage(message) {
+			$.ajax({
+				url : "/api/message",
+				type : "POST",
+				data : JSON.stringify(message),
+				contentType : "application/json; charset=utf-8",
+				success : function(data, textStatus, xhr) {
+					$('#message').val("");
+					$("#newModal").modal('hide');
+					$('#requiresAction').prop('checked', false);
+
+					ownMsgId.push(data.id);
+				},
+				error : function(textStatus, errorThrown) {
 				}
-				if (cell) {
-					url += "to=" + cell;
-				}
-	
-				return url;
-			}
-	
-			function fetchMessages(url, callback) {
-	
-				$.ajax({
-					url : url,
-					type : "GET",
-					contentType : "application/json; charset=utf-8",
-					success : callback,
-					error : function(textStatus, errorThrown) {
-						swal("Connection lost", "Try a refresh", "warning");
-					}
-				});
-			}
-	
-			function emptyTbody() {
-				$('tbody').empty();
-			}
-			/*<![CDATA[*/
-			function updateAllMessages(data, textStatus, xhr) {
-	
-				if (JSON.stringify(data).includes("DOCTYPE")) {
-					location.reload();
-				}
-				$(data).each(
-						function(pos, item) {
-	
-							if ($.inArray(item.id, msg) === -1) {
-	
-								msg.push(item.id);
-								date = moment(item.savedAt).format(
-										'DD/MM/YYYY/HH:mm:ss');
-								var $tr = $('<tr>', {
-									class : 'blink'
-								});
-	
-								var td = '<td>'
-										+ moment(item.savedAt)
-												.format('DDnovHHmmss')
-										+ '</td><td>' + item.sentBy + '</td><td>'
-										+ item.sentTo + '</td><td>' + item.message
-										+ '</td>';
-	
-								$tr.append(td);
-	
-								if (item.sentTo === "SOC1") {
-									$("#soc1_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "SOC2") {
-									$("#soc2_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "SOC3") {
-									$("#soc3_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "SOC4") {
-									$("#soc4_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "SOC5") {
-									$("#soc5_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "DropIn") {
-									$("#soc6_msg_body").prepend($tr);
-								}
-								if (item.sentTo === "FELLES") {
-									if ($.inArray(item.id, ownMsgId) === -1) {
-										playAudio();
-									}
-									$("tbody").prepend($tr);
-								} else {
-									$("#soc0_msg_body").prepend(
-											'<tr class="blink"><td>'
-													+ moment(item.savedAt).format(
-															'DDnovHHmmss')
-													+ '</td><td>' + item.sentBy
-													+ '</td><td>' + item.sentTo
-													+ '</td><td>' + item.message
-													+ '</td></tr>');
-								}
-	
-							}
-						})
-	
-			}
-			/*]]>*/
-			$(document).ready(function() {
-	
-				$('#save').click(function() {
-					var message = {};
-					message.sentTo = $('#to').val();
-					message.sentBy = $('#from').val();
-					message.message = $('#message').val();
-					message.requiresAction = $('#requiresAction').is(':checked');
-	
-					saveMessage(message);
-	
-				})
-	
-				$('#fab-add').click(function() {
-					onClickNewFab();
-				})
-				fetchMessages(getUrlMessages(date, null), updateAllMessages);
-				window.setInterval(function() {
-					fetchMessages(getUrlMessages(date, null), updateAllMessages);
-				}, 3000);
-	
-			})
-	
-			$('a').click(function(e) {
-				e.preventDefault();
-				$('a').removeClass('active');
-				$('.msg-container').hide();
-	
-				$($(this).attr('data-target')).show();
-				$(this).addClass('active');
 			});
-	
-			function onClickNewFab() {
-				$("#newModal").modal();
+		}
+
+		function getUrlMessages(date, cell) {
+			var url = "/api/message?"
+			if (date) {
+				//var dateString = moment(date).format('DD/MM/YYYY/HH:mm:ss');
+				url += "after=" + date;
+
 			}
-			function playAudio() {
-				var audio = document.getElementById("audio");
-				audio.play();
+			if (cell) {
+				url += "to=" + cell;
 			}
-		</script>
-	</body>
+
+			return url;
+		}
+
+		function fetchMessages(url, callback) {
+
+			$.ajax({
+				url : url,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				success : callback,
+				error : function(textStatus, errorThrown) {
+					swal("Connection lost", "Try a refresh", "warning");
+				}
+			});
+		}
+
+		function emptyTbody() {
+			$('tbody').empty();
+		}
+		/*<![CDATA[*/
+		function updateAllMessages(data, textStatus, xhr) {
+		
+			if (JSON.stringify(data).includes("DOCTYPE")) {
+				location.reload();
+			}
+			$(data).each(function(pos, item) {
+				
+						if ($.inArray(item.id, msg) === -1) {
+							
+							msg.push(item.id);
+							playAudio(item.id,item.sentTo);
+							
+							date = moment(item.savedAt).format(
+									'DD/MM/YYYY/HH:mm:ss');
+							var $tr = $('<tr>', {
+								class : 'blink'
+							});
+
+							var td = '<td>'
+									+ moment(item.savedAt)
+											.format('DDnovHHmmss')
+									+ '</td><td>' + item.sentBy + '</td><td>'
+									+ item.sentTo + '</td><td>' + item.message
+									+ '</td>';
+
+							$tr.append(td);
+							
+
+							if (item.sentTo === ITEM_ENUM.SOC1) {
+								$("#soc1_msg_body").prepend($tr);
+							}
+							if (item.sentTo === ITEM_ENUM.SOC2) {
+								$("#soc2_msg_body").prepend($tr);
+							}
+							if (item.sentTo === ITEM_ENUM.SOC3) {
+								$("#soc3_msg_body").prepend($tr);
+							}
+							if (item.sentTo === ITEM_ENUM.SOC4) {
+								$("#soc4_msg_body").prepend($tr);
+							}
+							if (item.sentTo === ITEM_ENUM.SOC5) {
+								$("#soc5_msg_body").prepend($tr);
+							}
+							if (item.sentTo === "DropIn") {
+								$("#soc6_msg_body").prepend($tr);
+							}
+							if (item.sentTo === ITEM_ENUM.felles) {
+								
+								$("tbody").prepend($tr);
+							} else {
+								$("#soc0_msg_body").prepend(
+										'<tr class="blink"><td>'
+												+ moment(item.savedAt).format(
+														'DDnovHHmmss')
+												+ '</td><td>' + item.sentBy
+												+ '</td><td>' + item.sentTo
+												+ '</td><td>' + item.message
+												+ '</td></tr>');
+							}
+
+						}
+					})
+
+		}
+		/*]]>*/
+		$(document).ready(function() {
+
+			$('#save').click(function() {
+				var message = {};
+				message.sentTo = $('#to').val();
+				message.sentBy = $('#from').val();
+				message.message = $('#message').val();
+				message.requiresAction = $('#requiresAction').is(':checked');
+
+				saveMessage(message);
+
+			})
+
+			$('#fab-add').click(function() {
+				onClickNewFab();
+			})
+			
+			startFetchingMessages();
+		})
+		
+		$("#audio-chooser").change(function () {
+			    var str = "";
+			    $( "#audio-chooser option:selected" ).each(function() {
+			    	alert("Choosen: " +$(this).attr('data-target'));
+					audioMsgFor = $(this).attr('data-target');
+			    });
+				
+		 });
+		
+		function startFetchingMessages(){
+			fetchMessages(getUrlMessages(date, null), updateAllMessages);
+			window.setInterval(function() {
+				fetchMessages(getUrlMessages(date, null), updateAllMessages);
+			}, 3000);
+		}
+
+		$('a').click(function(e) {
+			e.preventDefault();
+			$('a').removeClass('active');
+			$('.msg-container').hide();
+
+			$($(this).attr('data-target')).show();
+			$(this).addClass('active');
+		});
+
+		function onClickNewFab() {
+			$("#newModal").modal();
+		}
+		function playAudio(item_id, to) {
+			
+			if(to === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
+				
+				if ($.inArray(item_id, ownMsgId) === -1) {
+					var audio = document.getElementById("audio");
+					audio.play();
+				}
+			}
+		}
+	</script>
+</body>
 </html>
