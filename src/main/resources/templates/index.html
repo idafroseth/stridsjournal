@@ -148,19 +148,20 @@ table {
 			<div class="col-md-12">
 
 				<ul class="nav nav-tabs">
-					<li class="nav-item "><a data-target="#all"
-						class="nav-link active">Alle</a></li>
-					<li class="nav-item"><a data-target="#felles" class="nav-link">Felles</a></li>
+					
+					<li class="nav-item"><a data-target="#felles" class="nav-link active">Felles</a></li>
 					<li class="nav-item"><a data-target="#soc1" class="nav-link">SOC1</a></li>
 					<li class="nav-item"><a data-target="#soc2" class="nav-link">SOC2</a></li>
 					<li class="nav-item"><a data-target="#soc3" class="nav-link">SOC3</a></li>
 					<li class="nav-item"><a data-target="#soc4" class="nav-link">SOC4</a></li>
 					<li class="nav-item"><a data-target="#soc5" class="nav-link">SOC5</a></li>
 					<li class="nav-item"><a data-target="#soc6" class="nav-link">DropIn</a></li>
+					<li class="nav-item "><a data-target="#all"
+						class="nav-link">Alle</a></li>
 				</ul>
 				<div class="messages">
-					<div class="msg-container table-responsive text-left" id="all">
-						<table class="table  " cellspacing="0" width="100%" id="msg-table">
+					<div class="msg-container table-responsive text-left" id="all" style="display:none;">
+						<table class="table" cellspacing="0" width="100%" id="msg-table">
 							<thead>
 								<tr>
 									<th>DTG</th>
@@ -191,7 +192,7 @@ table {
 
 
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc1">
+					<div class="msg-container table-responsive text-left" id="soc1" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -206,7 +207,7 @@ table {
 						</table>
 
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc2">
+					<div class="msg-container table-responsive text-left" id="soc2" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -220,7 +221,7 @@ table {
 							<tbody id="soc2_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc3">
+					<div class="msg-container table-responsive text-left" id="soc3" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -234,7 +235,7 @@ table {
 							<tbody id="soc3_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc4">
+					<div class="msg-container table-responsive text-left" id="soc4" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -248,7 +249,7 @@ table {
 							<tbody id="soc4_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc5">
+					<div class="msg-container table-responsive text-left" id="soc5" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -262,7 +263,7 @@ table {
 							<tbody id="soc5_msg_body"></tbody>
 						</table>
 					</div>
-					<div class="msg-container table-responsive text-left" id="soc6">
+					<div class="msg-container table-responsive text-left" id="soc6" style="display:none;">
 						<table class="table  " cellspacing="0" width="100%"
 							id="postlist-table">
 							<thead>
@@ -397,8 +398,6 @@ table {
 		/*]]>*/
 		$(document).ready(function() {
 
-			$('.msg-container').hide();
-			$('#all').show();
 			$('#save').click(function() {
 				var message = {};
 				message.sentTo = $('#to').val();
@@ -428,6 +427,7 @@ table {
 			$($(this).attr('data-target')).show();
 			$(this).addClass('active');
 		});
+		
 		function onClickNewFab() {
 			$("#newModal").modal();
 		}
