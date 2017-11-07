@@ -26,13 +26,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/register","/assets/**","/api/**").permitAll()
+				.antMatchers("/register","/assets/**").permitAll()
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 				.anyRequest().authenticated().and().formLogin().loginPage("/login")
 				.defaultSuccessUrl("/")
 				.permitAll().and().logout().logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling()
 				.accessDeniedPage("/403");
-		http.headers().frameOptions().disable();
+		http.headers().frameOptions().disable(); 
 		http.csrf().disable();
 	}
 

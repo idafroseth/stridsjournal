@@ -169,3 +169,61 @@ footer{
   -o-animation:      invalid 1s  linear 1; /* Opera 12+ */
   animation:         invalid 1s  linear 1; /* IE 10+ */
 }
+
+.header-site {
+	background-color: #b000bb;
+	background: /* top, transparent red */ linear-gradient( rgba( 0, 0, 0,
+		0.5), rgba( 0, 0, 0, 0.5)), url(/assets/img/pexels-photo.jpg);
+	background-position: center center;
+	background-size: 130%;
+	height: 40vh;
+	width: 100%;
+	text-align: center;
+	color: white;
+}
+
+.header-site h1 {
+	padding-top: 12vh;
+}
+
+.border-left {
+	border-left-style: solid;
+	border-width: 1px;
+	border-color: #666;
+	height: 100vh;
+}
+
+body {
+	background:#333;
+	color: #fff;
+	margin-top: 40px;
+}
+
+.modal, .modal-dialog {
+	color: black;
+}
+
+.messages {
+	background: #fff;
+	color: black;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+}
+
+.nav-item {
+	color: gray;
+}
+
+.nav-link:hover, .nav-item:hover {
+	color: #aaa;
+}
+
+.nav-item .active {
+	color: gray;
+}
+
+table {
+	width: 100%;
+	margin: auto;
+}
