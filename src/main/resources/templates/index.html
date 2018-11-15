@@ -43,7 +43,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form th:action="@{/login}" method="post" id="loginForm"
+					<form th:action="@{/message/send}" method="post" id="messageForm"
 						class="text-left">
 						<div class="form-group" style="display: none;">
 							<div class="form-group">
@@ -327,8 +327,7 @@
 						if ($.inArray(item.id, msg) === -1) {
 							
 							msg.push(item.id);
-							playAudio(item.id,item.sentTo);
-							
+							notifyUser(item);
 							date = moment(item.savedAt).format(
 									'DD/MM/YYYY/HH:mm:ss');
 							var $tr = $('<tr>', {
@@ -337,7 +336,7 @@
 
 							var td = '<td>'
 									+ moment(item.savedAt)
-											.format('DDnovHHmmss')
+											.format('DDHHmmMMMYYYY')
 									+ '</td><td>' + item.sentBy + '</td><td>'
 									+ item.sentTo + '</td><td>' + item.message
 									+ '</td>';
@@ -382,8 +381,7 @@
 
 		}
 		/*]]>*/
-		$(document).ready(function() {
-
+		function initSaveButton(){
 			$('#save').click(function() {
 				var message = {};
 				message.sentTo = $('#to').val();
@@ -394,12 +392,20 @@
 				saveMessage(message);
 
 			})
+		}
+		
+		$(document).ready(function() {
 
+			initSaveButton();
+			
 			$('#fab-add').click(function() {
 				onClickNewFab();
 			})
 			
 			startFetchingMessages();
+			
+			requestNotificationPermissions();
+			
 		})
 		
 		$("#audio-chooser").change(function () {
@@ -438,6 +444,55 @@
 					audio.play();
 				}
 			}
+		}
+		
+		function notifyUser(item){
+			//Play sound
+			 playAudio(item.id,item.sentTo);
+			
+			 if (Notification.permission === "granted") {
+				 //if user is allowed to display push notifications,show a notification
+				 showNotification(item);
+			 }
+			
+			 
+		}
+		function requestNotificationPermissions(){
+			
+			Notification.requestPermission(function(){
+				 // Let's check if the browser supports notifications
+				 
+				  if (!("Notification" in window)) {
+				    alert("This browser does not support system notifications");
+				  }
+
+				  // Let's check whether notification permissions have already been granted
+				  else if (Notification.permission === "granted") {
+					  
+				    // If it's okay let's create a notification
+				  //  var notification = new Notification("Hi there!");
+				  }
+
+				  // Otherwise, we need to ask the user for permission
+				  else if (Notification.permission !== 'denied') {
+					  
+				    Notification.requestPermission(function (permission) {
+				      // If the user accepts, let's create a notification
+				      if (permission === "granted") {
+				       // var notification = new Notification("Hi there!");
+				      }
+				    });
+				  }
+
+				  // Finally, if the user has denied notifications and you 
+				  // want to be respectful there is no need to bother them any more.
+			});
+		}
+	 	function showNotification(messageObject){
+	 		
+			//var img = '/to-do-notifications/img/icon-128.png';
+			var text = "From: "+ messageObject.sentBy + "\nTo: "+ messageObject.sentTo + "\nMessage: "+ messageObject.message + "\n";
+			var notification = new Notification('New message', { body: text, sound: '/assets/mp3/notification.mp3', silent:false});
 		}
 	</script>
 </body>

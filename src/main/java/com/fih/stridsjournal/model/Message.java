@@ -8,11 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-/**
- * This is a comment to enable push
- * @author Zelus
- *
- */
 
 @Entity
 public class Message {
@@ -25,6 +20,7 @@ public class Message {
 	private String message;
 	private String sentTo;
 	private boolean requiresAction = false;
+
 	
 	private Date savedAt = new Date();
 	
