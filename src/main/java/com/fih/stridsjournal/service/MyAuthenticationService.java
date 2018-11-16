@@ -3,6 +3,7 @@ package com.fih.stridsjournal.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,8 @@ public class MyAuthenticationService implements UserDetailsService  {
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 	
 		
-		com.fih.stridsjournal.model.User user = userDao.findOne(username);
+		Optional<com.fih.stridsjournal.model.User> userOptional = userDao.findById(username);
+		com.fih.stridsjournal.model.User user = userOptional.isPresent() ? userOptional.get() : null;
 		if(user == null){
 			return null;
 		}

@@ -13,4 +13,9 @@ public class MessageController {
 		return "index";
 	}
 
+	@GetMapping(value = "message")
+	public String getSocketPage() {
+	
+		return "subscribe";
+	}
 }

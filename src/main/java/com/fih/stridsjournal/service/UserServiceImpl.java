@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		if(username == null){
 			return false;
 		}
-		return userDao.exists(username.toLowerCase());
+		return userDao.existsById(username.toLowerCase());
 	}
 
 	
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 			System.out.println("***User was null??");
 			return null;
 		}
-		if(userDao.exists(user.getUsername())){
+		if(userDao.existsById(user.getUsername())){
 			System.out.println("***User already exists??");
 			return null;
 		}
