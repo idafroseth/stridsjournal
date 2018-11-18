@@ -18,13 +18,15 @@ var CLIENT = {
 			console.log("Trying to connect");
 		    var socket = new SockJS('/msg-websocket');
 		    stompClient = Stomp.over(socket);
-		    stompClient.connect("",this.onConnectSuccess );
+		    stompClient.connect("",this.onConnectSuccess ,function(message){
+		    		if(message.includes("Lost connection")){
+		    			swal("Connection lost", "Try a refresh", "warning");
+		    		}
+		    });
 		},
 		onConnectSuccess : function (frame) {
-			//alert("SUBSRIBE?");
 			console.log("setting up subscription to /topic/messages");
 		    stompClient.subscribe('/topic/messages', function(stomp){
-		    		alert("THIS IS WORKING! OR NOT??");
 				console.log("Messages recived: "+ stomp);
 				CLIENT.ioController.prependMessage(JSON.parse(stomp.body));
 		    } );
@@ -73,23 +75,29 @@ var CLIENT = {
 			
 			//var img = '/to-do-notifications/img/icon-128.png';
 			var text = "From: "+ messageObject.sentBy + "\nTo: "+ messageObject.sentTo + "\nMessage: "+ messageObject.message + "\n";
+
 			var notification = new Notification('New message', { body: text, sound: '/assets/mp3/notification.mp3', silent:false});
+
+				
 		},
 
 		notifyUser : function (item){
 			if(item.sentTo === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
 				this.playAudio(item.id);
-				
-				 if (Notification.permission === "granted") {
+
+				 if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
+					 
 					 //if user is allowed to display push notifications,show a notification
-					 this.showNotification(item);
-				 }
+					 this.showNotification(item);	 
+				}
 			}
 		},
 		prependMessage : function (item) {
 				//msg.push(item.id);
+				
 				console.log("prepending message" +JSON.stringify(item));
 				this.notifyUser(item);
+				
 				date = moment(item.savedAt).format(
 						'DD/MM/YYYY/HH:mm:ss');
 				var $tr = $('<tr>', {
@@ -104,7 +112,7 @@ var CLIENT = {
 						+ '</td>';
 	
 				$tr.append(td);
-				
+
 				if (item.sentTo === ITEM_ENUM.SOC1) {
 					$("#soc1_msg_body").prepend($tr);
 				}
@@ -148,7 +156,7 @@ var CLIENT = {
 			});
 		},
 		requestNotificationPermissions: function(){
-			
+//			navigator.serviceWorker.register('assets/js/sw.js');
 			Notification.requestPermission(function(){
 				 // Let's check if the browser supports notifications
 				 
@@ -158,7 +166,7 @@ var CLIENT = {
 
 				  // Let's check whether notification permissions have already been granted
 				  else if (Notification.permission === "granted") {
-					  
+
 				    // If it's okay let's create a notification
 				  //  var notification = new Notification("Hi there!");
 				  }

@@ -249,14 +249,16 @@
 	</div>
 	<audio id="audio" src="/assets/mp3/notification.mp3"></audio>
 	<div th:replace="fragments/javascript :: generalJs" th:remove="tag"></div>
-	    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<!-- script src="/webjars/jquery/jquery.min.js"></script-->
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 	<script src="/assets/js/websocketclient.js"></script>
 	<script>
 
 		$(document).ready(function() {
-	
+			//alert(navigator.userAgent);
 			CLIENT.ioController.initSaveButton();
+			
 			CLIENT.ioController.requestNotificationPermissions();
 			
 			CLIENT.webSocketController.connectAndSubscribe();
