@@ -217,6 +217,8 @@ body {
 
 .nav-link:hover, .nav-item:hover {
 	color: #aaa;
+	cursor:pointer;
+	
 }
 
 .nav-item .active {
