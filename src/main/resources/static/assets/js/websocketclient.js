@@ -124,22 +124,9 @@ var CLIENT = {
 						+ '</td>';
 	
 				$tr.append(td);
-
-				if (item.sentTo === ITEM_ENUM.SOC1) {
-					$("#soc1_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC2) {
-					$("#soc2_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC3) {
-					$("#soc3_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC4) {
-					$("#soc4_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC5) {
-					$("#soc5_msg_body").prepend($tr);
-				}
+				
+				//add to the correct soc
+				$("#"+item.sentTo.toLowerCase()+"_msg_body" ).prepend($tr);
 				if (item.sentTo === "DropIn") {
 					$("#soc6_msg_body").prepend($tr);
 				}
