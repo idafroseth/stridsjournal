@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MessageController {
 	
 
-	@GetMapping(value = "")
+	@GetMapping(value = "index")
 	public String getDashboard() {
 	
 		return "index";
 	}
 
-	@GetMapping(value = "message")
+	@GetMapping(value = "")
 	public String getSocketPage() {
 	
 		return "subscribe";

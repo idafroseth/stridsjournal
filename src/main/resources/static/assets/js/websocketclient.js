@@ -85,11 +85,11 @@ var CLIENT = {
 			if(item.sentTo === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
 				this.playAudio(item.id);
 
-				 if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
+				/* if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
 					 
 					 //if user is allowed to display push notifications,show a notification
 					 this.showNotification(item);	 
-				}
+				}*/
 			}
 		},
 		prependMessage : function (item) {
