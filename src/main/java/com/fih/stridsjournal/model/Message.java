@@ -2,11 +2,10 @@ package com.fih.stridsjournal.model;
 
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -14,8 +13,7 @@ import javax.persistence.Id;
 @Entity
 public class Message {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private UUID id;
 	
 	private String sentBy;
 	@Column(name = "message", length = 4096)
@@ -27,11 +25,11 @@ public class Message {
 	private Date savedAt = new Date();
 	
 
-	public long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
