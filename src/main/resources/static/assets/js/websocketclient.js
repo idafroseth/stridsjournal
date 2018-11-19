@@ -45,10 +45,20 @@ var CLIENT = {
 			   CLIENT.ioController.clearAndHideMsg();
 		}
 	},
+	createUUID : function () {
+		  function s4() {
+			    return Math.floor((1 + Math.random()) * 0x10000)
+			      .toString(16)
+			      .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+	},
 	ioController : {
 		 initSaveButton : function(){
 			$('#save').click(function() {
 				var message = {};
+				message.id = CLIENT.createUUID();
+				ownMsgId.push(message.id);
 				message.sentTo = $('#to').val();
 				message.sentBy = $('#from').val();
 				message.message = $('#message').val();
@@ -66,31 +76,33 @@ var CLIENT = {
 			$('#requiresAction').prop('checked', false);
 		},
 		playAudio : function (item_id) {			
-			if ($.inArray(item_id, ownMsgId) === -1) {
-				var audio = document.getElementById("audio");
-				audio.play();
-			}
+			var audio = document.getElementById("audio");
+			audio.play();
 		},
 		showNotification : function(messageObject){
 			
 			//var img = '/to-do-notifications/img/icon-128.png';
 			var text = "From: "+ messageObject.sentBy + "\nTo: "+ messageObject.sentTo + "\nMessage: "+ messageObject.message + "\n";
-
-			var notification = new Notification('New message', { body: text, sound: '/assets/mp3/notification.mp3', silent:false});
+			var notification = new Notification('Ny melding', { body: text, sound: '/assets/mp3/notification.mp3', silent:false});
 
 				
 		},
 
 		notifyUser : function (item){
-			if(item.sentTo === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
-				this.playAudio(item.id);
+			if ($.inArray(item.id, ownMsgId) === -1) {
+				if(item.sentTo === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
 
-				/* if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
-					 
-					 //if user is allowed to display push notifications,show a notification
-					 this.showNotification(item);	 
-				}*/
+					if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
+						 //if user is allowed to display push notifications,show a notification
+
+						 this.showNotification(item);	 
+					}
+					//Play sound anyway	
+					this.playAudio(item.id);
+					
+				}
 			}
+			
 		},
 		prependMessage : function (item) {
 				//msg.push(item.id);
