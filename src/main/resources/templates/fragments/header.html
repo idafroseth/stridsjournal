@@ -44,7 +44,33 @@
 	</head>
 		
 		
+	<body>
+		    <div th:fragment="header">
+                       <div class="linebanner"></div>
+       
+                       <div class="masthead clearfix">
+                               <div class="inner">
+                                     <div class="navbar-brand hidden-xs-down">appiTude<!--  span class="icon-check" style="font-size:2.5em;"></span--><!--  img src="assets/icon/logo.svg" alt="" width="60px"
+                                                     height="60px"/--> 
+                                     </div>
+                                     <!-- nav class="nav nav-masthead">
+                                             <a class="nav-link" href="/index" id="navHome">Home</a>
+                                             <a class="nav-link" href="/todo/dashboard"
+                                                     th:if="${account != null}"
+                                                     th:classappend="${#httpServletRequest.getRequestURI() == '/todo/dashboard' ? 'active':''}">Todo</a>
+                                             <a class="nav-link" href="/login" id="login"
+                                                     th:if="${account == null}">Login</a>
+                                             <a class="nav-link" href="/logout"
+                                                     th:if="${account != null}">Logout</a>
+                                     </nav-->
+                             </div>
+     
+     
+                     </div>
+             </div>
 		
+		
+	</body>
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
