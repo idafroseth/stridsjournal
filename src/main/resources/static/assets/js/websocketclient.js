@@ -28,7 +28,9 @@ var CLIENT = {
 			console.log("setting up subscription to /topic/messages");
 		    stompClient.subscribe('/topic/messages', function(stomp){
 				console.log("Messages recived: "+ stomp);
-				CLIENT.ioController.prependMessage(JSON.parse(stomp.body));
+				var message = JSON.parse(stomp.body);
+				CLIENT.ioController.notifyUser(message);
+				CLIENT.ioController.prependMessage(message);
 		    } );
 		},
 		onMessageReceived :  function (stomp) {
@@ -105,56 +107,14 @@ var CLIENT = {
 			
 		},
 		prependMessage : function (item) {
-				//msg.push(item.id);
-				
-				console.log("prepending message" +JSON.stringify(item));
-				this.notifyUser(item);
-				
-				date = moment(item.savedAt).format(
-						'DD/MM/YYYY/HH:mm:ss');
-				var $tr = $('<tr>', {
-					class : 'blink'
-				});
-	
-				var td = '<td>'
-						+ moment(item.savedAt)
-								.format('DDHHmmMMMYYYY')
-						+ '</td><td>' + item.sentBy + '</td><td>'
-						+ item.sentTo + '</td><td>' + item.message
-						+ '</td>';
-	
-				$tr.append(td);
-
-				if (item.sentTo === ITEM_ENUM.SOC1) {
-					$("#soc1_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC2) {
-					$("#soc2_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC3) {
-					$("#soc3_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC4) {
-					$("#soc4_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.SOC5) {
-					$("#soc5_msg_body").prepend($tr);
-				}
-				if (item.sentTo === "DropIn") {
-					$("#soc6_msg_body").prepend($tr);
-				}
-				if (item.sentTo === ITEM_ENUM.felles) {
-					$("tbody").prepend($tr);
-				} else {
-					$("#soc0_msg_body").prepend(
-							'<tr class="blink"><td>'
-									+ moment(item.savedAt).format(
-											'DDnovHHmmss')
-									+ '</td><td>' + item.sentBy
-									+ '</td><td>' + item.sentTo
-									+ '</td><td>' + item.message
-									+ '</td></tr>');
-				}
+				$("#message_table").prepend(
+						'<tr class="blink '+item.sentTo.toLowerCase()+'"><td>'
+								+ moment(item.savedAt).format(
+										'DDnovHHmmss')
+								+ '</td><td>' + item.sentBy
+								+ '</td><td>' + item.sentTo
+								+ '</td><td>' + item.message
+								+ '</td></tr>');
 		},
 		updateAllMessages : function(data, textStatus, xhr) {
 	
@@ -168,17 +128,13 @@ var CLIENT = {
 			});
 		},
 		requestNotificationPermissions: function(){
-//			navigator.serviceWorker.register('assets/js/sw.js');
-			Notification.requestPermission(function(){
-				 // Let's check if the browser supports notifications
-				 
+			Notification.requestPermission(function(){				 
 				  if (!("Notification" in window)) {
 				    alert("This browser does not support system notifications");
 				  }
 
 				  // Let's check whether notification permissions have already been granted
 				  else if (Notification.permission === "granted") {
-
 				    // If it's okay let's create a notification
 				  //  var notification = new Notification("Hi there!");
 				  }
@@ -206,13 +162,11 @@ var CLIENT = {
 function getUrlMessages(date, cell) {
 	var url = "/api/message?"
 	if (date) {
-		//var dateString = moment(date).format('DD/MM/YYYY/HH:mm:ss');
 		url += "after=" + date;
 	}
 	if (cell) {
 		url += "to=" + cell;
 	}
-
 	return url;
 }
 
@@ -243,19 +197,33 @@ $("#audio-chooser").change(function () {
 function getAllSavedMessages(){
 	fetchMessages(getUrlMessages(null, null), CLIENT.ioController.updateAllMessages);
 }
-/*
-function startFetchingMessages(){
-	fetchMessages(getUrlMessages(date, null), updateAllMessages);
-	window.setInterval(function() {
-		fetchMessages(getUrlMessages(date, null), updateAllMessages);
-	}, 3000);
-}
-*/
+
 $('a').click(function(e) {
 	e.preventDefault();
 	$('a').removeClass('active');
-	$('.msg-container').hide();
+	
+	//filter table 
+	//1) 
+	/*if alle:
+	 * 		Show all table rows
+	 * else:
+	 * 		hide all tr
+	 * 		show felles
+	 * 		show soc_id
+	 */
+	var clickedTab = $(this).attr('data-target');
+	if(clickedTab === ITEM_ENUM.all){
+		$('tr').show();
+	}else {
+		$('tr').hide();
+		$('.felles').show();
+		$('.'+clickedTab).show();
+	}
 
-	$($(this).attr('data-target')).show();
 	$(this).addClass('active');
+	
+	/** OLD METHODS
+	$('.msg-container').hide();
+	$($(this).attr('data-target')).show();
+	$(this).addClass('active');**/
 });
