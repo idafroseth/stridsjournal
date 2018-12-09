@@ -12,6 +12,7 @@ var ITEM_ENUM = {
 }
 var audioMsgFor = ITEM_ENUM.felles;
 var stompClient;
+var reconnectTries = 0;
 var CLIENT = {
 	webSocketController : {
 		connectAndSubscribe : function () {
@@ -19,12 +20,18 @@ var CLIENT = {
 		    var socket = new SockJS('/msg-websocket');
 		    stompClient = Stomp.over(socket);
 		    stompClient.connect("",this.onConnectSuccess ,function(message){
+		    	
 		    		if(message.includes("Lost connection")){
-		    			swal("Connection lost", "Try a refresh", "warning");
+		    			if(reconnectTries > 9){
+			    			swal("Connection lost", "Try a refresh", "warning");	
+		    			}
+		    			setTimeout(function(){CLIENT.webSocketController.connectAndSubscribe()}, 10000);
+		    			reconnectTries++;
 		    		}
 		    });
 		},
 		onConnectSuccess : function (frame) {
+			reconnectTries = 0;
 			console.log("setting up subscription to /topic/messages");
 		    stompClient.subscribe('/topic/messages', function(stomp){
 				console.log("Messages recived: "+ stomp);

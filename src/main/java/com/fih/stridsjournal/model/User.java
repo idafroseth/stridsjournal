@@ -1,14 +1,12 @@
 package com.fih.stridsjournal.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
 	private String username;
+//	private String name;
 	
 	
 	@JsonIgnore
@@ -76,5 +75,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	/*public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}*/
 
 }

@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
@@ -28,10 +30,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/register","/assets/**").permitAll()
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-				.anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/")
-				.permitAll().and().logout().logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling()
-				.accessDeniedPage("/403");
+				.anyRequest().authenticated()
+				.and()
+					.formLogin().loginPage("/login")
+					.defaultSuccessUrl("/").permitAll()
+				.and()
+					.logout().logoutSuccessUrl("/login?logout").permitAll()
+				.and()
+					.exceptionHandling().accessDeniedPage("/403")
+				;
+
 		http.headers().frameOptions().disable(); 
 		http.csrf().disable();
 	}
@@ -47,4 +55,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(authenticationService).passwordEncoder(passwordEncoder());
 	}
+	
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+	    JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+	    tokenRepository.setDataSource(dataSource);
+	    return tokenRepository;
+	}
+
 }
