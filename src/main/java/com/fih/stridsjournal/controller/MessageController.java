@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MessageController {
 	
 
-	@GetMapping(value = "index")
+	@GetMapping(value = "mass")
 	public String getDashboard() {
 	
 		return "index";

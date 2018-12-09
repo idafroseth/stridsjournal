@@ -278,6 +278,7 @@
 					ownMsgId.push(data.id);
 				},
 				error : function(textStatus, errorThrown) {
+					alert(JSON.stringify(textStatus));
 				}
 			});
 		}
@@ -314,7 +315,7 @@
 		}
 		
 		/*<![CDATA[*/
-		function prependMssage(item){
+		function prependMessage(item){
 			msg.push(item.id);
 			notifyUser(item);
 			date = moment(item.savedAt).format(
@@ -364,6 +365,7 @@
 			}	
 		}
 		function updateAllMessages(data, textStatus, xhr) {
+			
 		
 			if (JSON.stringify(data).includes("DOCTYPE")) {
 				location.reload();
@@ -379,12 +381,22 @@
 
 		}
 		/*]]>*/
+		
+		function createUUID (){
+		  function s4() {
+			    return Math.floor((1 + Math.random()) * 0x10000)
+			      .toString(16)
+			      .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+		}
 		function initSaveButton(){
 			$('#save').click(function() {
 				var message = {};
 				message.sentTo = $('#to').val();
 				message.sentBy = $('#from').val();
 				message.message = $('#message').val();
+				message.id = createUUID();
 				message.requiresAction = $('#requiresAction').is(':checked');
 				saveMessage(message);
 			})
@@ -397,7 +409,7 @@
 		$(document).ready(function() {
 
 			initSaveButton();
-			requestNotificationPermissions();
+			//requestNotificationPermissions();
 			//fetch all saved msg
 			//subscribe
 			getAllSavedMessages();
@@ -414,6 +426,7 @@
 		 });
 		
 		function getAllSavedMessages(){
+			
 			fetchMessages(getUrlMessages(null, null), updateAllMessages);
 		}
 		function startFetchingMessages(){
@@ -450,10 +463,10 @@
 			//Play sound
 			 playAudio(item.id,item.sentTo);
 			
-			 if (Notification.permission === "granted") {
+		/*	 if (Notification.permission === "granted") {
 				 //if user is allowed to display push notifications,show a notification
 				 showNotification(item);
-			 }
+			 }*/
 			
 			 
 		}

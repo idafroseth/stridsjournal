@@ -16,6 +16,7 @@ var reconnectTries = 0;
 var CLIENT = {
 	webSocketController : {
 		connectAndSubscribe : function () {
+
 			console.log("Trying to connect");
 		    var socket = new SockJS('/msg-websocket');
 		    stompClient = Stomp.over(socket);
@@ -31,6 +32,7 @@ var CLIENT = {
 		    });
 		},
 		onConnectSuccess : function (frame) {
+
 			reconnectTries = 0;
 			console.log("setting up subscription to /topic/messages");
 		    stompClient.subscribe('/topic/messages', function(stomp){
@@ -100,7 +102,6 @@ var CLIENT = {
 		notifyUser : function (item){
 			if ($.inArray(item.id, ownMsgId) === -1) {
 				if(item.sentTo === audioMsgFor || audioMsgFor === ITEM_ENUM.all){
-
 					if (Notification.permission === "granted" &&  !navigator.userAgent.includes("ndroid")) {
 						 //if user is allowed to display push notifications,show a notification
 
@@ -135,7 +136,9 @@ var CLIENT = {
 			});
 		},
 		requestNotificationPermissions: function(){
-			Notification.requestPermission(function(){				 
+		
+			Notification.requestPermission(function(){	
+			
 				  if (!("Notification" in window)) {
 				    alert("This browser does not support system notifications");
 				  }
